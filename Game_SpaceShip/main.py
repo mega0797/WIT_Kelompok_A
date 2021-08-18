@@ -1,6 +1,7 @@
 import pygame 
 import random
 import math
+from pygame import mixer
 
 # instalasi
 pygame.init()
@@ -8,12 +9,19 @@ pygame.init()
 # mengubah title
 pygame.display.set_caption("Spaceship Game By. Group A")
 
+#background music
+mixer.music.load('background.mp3')
+mixer.music.play(-1)
+
+#move sound
+move = pygame.mixer.Sound('move.wav')
+
 # mengubah logo
 icon = pygame.image.load("logo.png")
 pygame.display.set_icon(icon)
 
 # mengatur ukuran layar/screen
-height = 500
+height = 300
 width = 550
 
 screen = pygame.display.set_mode([height, width])
@@ -34,10 +42,12 @@ def enemy(x,y):
     #draw the enemy
     img_enemy = pygame.image.load("enemy.png")
     screen.blit(img_enemy,(x,y))
+    
 
 x_enemy = random.randint(50,260)
 y_enemy = random.randint(5,10)
 y_enemy_point = 6.5
+
 
 # collision
 def collison(x_player,y_player,x_enemy,y_enemy):
@@ -70,14 +80,18 @@ while running:
             running = False
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT or event.key == ord('a'):
+                move.play()
                 x_player_point -= 5
             if event.key == pygame.K_RIGHT or event.key == ord('d'):
+                move.play()
                 x_player_point += 5
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == ord('a'):
+                move.play()
                 x_player_point = 0
             if event.key == pygame.K_RIGHT or event.key == ord('d'):
+                move.play()
                 x_player_point = 0
 
     # movement player
