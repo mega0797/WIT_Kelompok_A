@@ -9,6 +9,9 @@ pygame.init()
 # mengubah title
 pygame.display.set_caption("Spaceship Game By. Group A")
 
+#background
+background = pygame.image.load("background.png")
+
 #background music
 mixer.music.load('background.mp3')
 mixer.music.play(-1)
@@ -74,6 +77,7 @@ running = True
 while running:
     last = pygame.time.get_ticks()
     screen.fill((0, 0,0))
+    screen.blit(background, [0, 0])
     #loop
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
